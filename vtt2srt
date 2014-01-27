@@ -1,0 +1,26 @@
+#!/bin/bash
+#Developed by xubuntu4iran
+#Licensed under NewBSD
+
+data=$(cat "$@" |sed 1d|sed 's/\([0-9]\)\.\([0-9]\)/\1,\2/g');
+
+blc=$(echo "$data"|sed -n 1p)
+lc=$(echo "$data"|wc -l)
+(( ++lc ));
+
+(( i=1 ));
+(( n=1 ));
+while (( $i <= $lc ));do
+ ld=$(echo "$data"|sed -n "$i"p);
+ 
+ if [[ "$ld" == "$blc" ]];then
+ 	echo "$ld
+$n"
+(( ++n ));
+ else 
+ 	echo "$ld"
+ fi
+ 
+ 
+ (( ++i ));
+ done
